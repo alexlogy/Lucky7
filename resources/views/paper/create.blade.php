@@ -46,6 +46,13 @@
                 </div>
             </div>
 
+            <div class="col-xs-12 col-sm-12 col-sm-12">
+                <div class="form-group">
+                    <strong> Paper Owner </strong>
+                    <input type="text" name="owner" class="form-control" placeholder="Owner">
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-sm-12 text-center">
                 <button type="submit" class="btn btn-primary"> Submit </button>
             </div>

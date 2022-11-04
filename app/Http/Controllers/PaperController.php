@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paper;
+use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaperController extends Controller
 {
@@ -40,12 +42,37 @@ class PaperController extends Controller
         $request->validate([
             'title' => 'required',
             'content' =>'required',
+            'owner' => 'required',
         ]);
 
-        Paper::create($request->all());
+        $paper_id = DB::table('Papers')->insertGetId(
+            [
+                'title' => $request->string('title'),
+                'content' => $request->string('content'),
+            ]
+        );
 
-        return redirect()->route('paper.index')
-            ->with('success','Article submitted successfully.');
+        echo $paper_id;
+
+
+        $str_arr = explode (";", $request->string('owner'));
+        //print_r($str_arr);
+
+        foreach($str_arr AS $str) {
+            DB::table('submissions')->insertGetId(
+                [
+                    'paper_id' => $paper_id,
+                    'user_id' => $str,
+                ]
+            );
+        }
+
+        //$log = Paper::create($request->all());
+        //$log->save();
+
+        //echo $log->string('id');
+        //return redirect()->route('paper.index')
+            //->with('success','Article submitted successfully.');
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('paper.layout')
+@extends('submission.layout')
 
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('paper.index') }}"> Back </a>
+                <a class="btn btn-primary" href="{{ route('submission.index') }}"> Back </a>
             </div>
         </div>
     </div>
@@ -26,15 +26,15 @@
         </div>
     @endif
 
-    <form action="{{ route('paper.update', $paper->id) }}" method="POST">
+    <form action="{{ route('submission.update', $submission->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong> Title: </strong>
-                    <input type="text" name="title" value="{{ $paper->title }}" class="form-control" placeholder="Title">
+                    <strong> Paper Id </strong>
+                    <input type="text" name="title" value="{{ $submission->paper_id }}" class="form-control" placeholder="Title">
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong> Content: </strong>
-                    <input type="text" name="content" value="{{ $paper->content }}" class="form-control" placeholder="Content">
+                    <strong> User Id </strong>
+                    <input type="text" name="content" value="{{ $submission->user_id }}" class="form-control" placeholder="Content">
                 </div>
             </div>
         </div>

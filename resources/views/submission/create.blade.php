@@ -1,4 +1,4 @@
-@extends('paper.layout')
+@extends('submission.layout')
 
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('paper.index') }}">
+                <a class="btn btn-primary" href="{{ route('submission.index') }}">
                     Back
                 </a>
             </div>
@@ -28,13 +28,13 @@
         </div>
     @endif
 
-    <form action="{{ route('paper.store') }}" method="POST">
+    <form action="{{ route('submission.store') }}" method="POST">
         @csrf
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
-                   <strong> Title </strong>
+                   <strong> Paper Id </strong>
                     <input type="text" name="title" class="form-control" placeholder="Title">
                 </div>
             </div>

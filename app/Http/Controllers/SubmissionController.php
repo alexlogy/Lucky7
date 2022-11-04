@@ -22,8 +22,8 @@ class SubmissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' =>'required',
+            'paper_id' => 'required',
+            'author_id' =>'required',
         ]);
 
         Submission::create($request->all());
