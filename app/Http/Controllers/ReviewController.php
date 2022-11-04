@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Paper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -14,8 +16,24 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $review = Review::latest()->paginate(5);
-        return view('review.index', compact('review'))
+        $user = auth()->user();
+        $user_id = $user->id;
+        $uname = $user->name;
+
+        $userJoin = DB::table('users')
+        ->join('reviews','reviews.user_id','=','users.id')
+        ->join('papers','papers.id','=','reviews.paper_id')
+        ->where(['users.id' => $user_id])
+        ->get();
+
+        foreach($userJoin as $userj)
+        {
+          print_r($userj);
+        }
+
+        //$reviews = Review::latest()->paginate(5);
+    
+        return view('review.index', compact('userJoin'))
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
 
@@ -26,7 +44,8 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        return view('review.create');
+      $user = auth()->user();  
+      return view('review.create', compact('user'));
     }
 
     /**
@@ -40,9 +59,6 @@ class ReviewController extends Controller
         $request->validate([
             'paper_id' => 'required',
             'user_id' =>'required',
-            'paper_rating' => 'required',
-            'review_status' => 'required',
-            'review_rating' => 'required',
         ]);
 
         Review::create($request->all());
@@ -68,8 +84,15 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit($rid)
     {
+        $review = DB::table('reviews')
+        ->where(['rid' => $rid])
+        ->get();
+
+        $review = $review[0];
+
+        print_r($review);
         return view('review.edit',compact('review'));
     }
 
@@ -80,13 +103,15 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, $rid)
     {
-        $request->validate([
+      $review = Review::find($request->get('rid'));
 
-        ]);
-
-        $review->update($request-> all());
+      //$review = $review[0];
+      $review->paper_rating = $request->input('paper_rating');
+      $review->review_status = $request->input('review_status');
+      $review->review_rating = $request->input('review_rating');
+      $review->save();
 
         return redirect()->route('review.index')
             ->with('success','Review updated successfully');
@@ -98,11 +123,14 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy($review)
     {
-        $review->delete();
+      $r = Review::where('rid','=',$review);
+      $r->delete();  
+      
+      //$review->delete();
 
-        return redirect()->route('Review.index')
+        return redirect()->route('review.index')
             ->with('success','Review deleted successfully');
     }
 }

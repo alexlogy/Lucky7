@@ -14,16 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
+            $table->increments('rid');
             //$table->index('paper_id')->unsigned();
             //$table->foreign('paper_id')->references('id')->on('papers')->onDelete('cascade');
             $table->foreignIdFor(\App\Models\Paper::class);
             $table->foreignIdFor(\App\Models\User::class);
             //$table->index('user_id')->unsigned();
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('paper_rating');
-            $table->string('review_status');
-            $table->integer('review_rating');
+            $table->integer('paper_rating')->nullable();
+            $table->string('review_status')->nullable();
+            $table->integer('review_rating')->nullable();
             $table->timestamps();
         });
     }

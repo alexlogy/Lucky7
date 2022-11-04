@@ -5,6 +5,16 @@
         <h2> </h2>
     </div>
 
+    <table class="table table-bordered">
+        <tr>
+            <th> No </th>
+            <th> Paper ID </th>
+            <th> Reviewer ID </th>
+            <th> Paper Rating </th>
+            <th> Review </th>
+            <th> Review Rating </th>
+            <th width="280px"> Action </th>
+        </tr>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
@@ -21,32 +31,21 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
-        <tr>
-            <th> No </th>
-            <th> Paper Id </th>
-            <th> User Id </th>
-            <th> Paper Rating </th>
-            <th> Review Status </th>
-            <th> Review Rating </th>
-            <th width="280px"> Action </th>
-        </tr>
-
-    @foreach ($review as $review)
+    @foreach ($userJoin as $review)
         <tr>
            <td> {{ $i++ }} </td>
-            <td> {{ $review->paper_id }} </td>
-            <td> {{ $review->user_id }} </td>
+            <td> {{ $review->title }} </td>
+            <td> {{ $review->name }} </td>
             <td> {{ $review->paper_rating }} </td>
             <td> {{ $review->review_status }} </td>
             <td> {{ $review->review_rating }} </td>
             <td>
-                <form action="{{ route('review.destroy', $review->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('review.show', $review->id) }}">
+                <form action="{{ route('review.destroy', $review->rid) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('review.show', $review->rid) }}">
                         Show
                     </a>
 
-                    <a class="btn btn-primary" href="{{ route('review.edit', $review->id) }}">
+                    <a class="btn btn-primary" href="{{ route('review.edit', $review->rid) }}">
                         Edit
                     </a>
 

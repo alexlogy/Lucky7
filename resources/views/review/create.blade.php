@@ -35,14 +35,14 @@
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
                    <strong> Paper Id </strong>
-                    <input disabled type="text" name="paper_id" class="form-control" placeholder="Paper Id">
+                    <input type="text" name="paper_id" class="form-control" placeholder="Paper Id">
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
-                    <strong> User Id </strong>
-                    <input type="text" name="user_id" class="form-control" placeholder="User Id">
+                    <strong> Reviewer Id </strong>
+                    <input type="text" name="user_id" class="form-control" value="{{ $user->id }}">
                 </div>
             </div>
 

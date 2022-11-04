@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Edit Paper </h2>
+                <h2> Edit Review </h2>
             </div>
 
             <div class="pull-right">
@@ -26,10 +26,10 @@
         </div>
     @endif
 
-    <form action="{{ route('review.update', $paper->id) }}" method="POST">
+    <form action="{{ route('review.update', $review->rid) }}" method="POST">
         @csrf
         @method('PUT')
-
+        <input type="hidden" name="rid" value="{{ $review->rid }}">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong> Review Status: </strong>
+                    <strong> Review: </strong>
                     <input type="text" name="review_status" value="{{ $review->review_status }}" class="form-control" placeholder="Review Status">
                 </div>
             </div>
@@ -77,7 +77,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary"> Submit </button>
+                <button type="submit" class="btn btn-primary"> Save </button>
             </div>
         </div>
     </form>
