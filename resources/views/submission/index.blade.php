@@ -1,4 +1,4 @@
-@extends('paper.layout')
+@extends('submission.layout')
 
 @section('content')
     <div class="pull-left">
@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('paper.create') }}">
+                <a class="btn btn-success" href="{{ route('submission.create') }}">
                     Create New Paper
                 </a>
             </div>
@@ -29,18 +29,18 @@
             <th width="280px"> Action </th>
         </tr>
 
-    @foreach ($paper as $paper)
+    @foreach ($submission as $submission)
         <tr>
            <td> {{ $i++ }} </td>
-            <td> {{ $paper->title }} </td>
-            <td> {{ $paper->content }} </td>
+            <td> {{ $submission->paper_id }} </td>
+            <td> {{ $submission->user_id }} </td>
             <td>
-                <form action="{{ route('paper.destroy', $paper->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('paper.show', $paper->id) }}">
+                <form action="{{ route('submission.destroy', $submission->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('submission.show', $submission->id) }}">
                         Show
                     </a>
 
-                    <a class="btn btn-primary" href="{{ route('paper.edit', $paper->id) }}">
+                    <a class="btn btn-primary" href="{{ route('submission.edit', $submission->id) }}">
                         Edit
                     </a>
 
