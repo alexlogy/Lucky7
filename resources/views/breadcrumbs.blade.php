@@ -1,7 +1,7 @@
 @section('breadcrumbs')
     <section role="main" class="content-body">
         <header class="page-header">
-            <h2>Default Layout</h2>
+            <h2>@yield('title')</h2>
 
             <div class="right-wrapper text-end">
                 <ol class="breadcrumbs">

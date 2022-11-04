@@ -58,7 +58,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ URL::to('/admin') }}">
                                             List Users
                                         </a>
                                     </li>

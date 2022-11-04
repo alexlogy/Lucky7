@@ -1,6 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaperController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +27,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+// routes
+Route::resource('admin', AdminController::class);
+Route::resource('review', \App\Http\Controllers\ReviewController::class);
+Route::resource('paper', \App\Http\Controllers\PaperController::class);
+Route::resource('bid', \App\Http\Controllers\BidController::class);
+Route::resource('comment', \App\Http\Controllers\CommentController::class);
+Route::resource('submission', \App\Http\Controllers\SubmissionController::class);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
