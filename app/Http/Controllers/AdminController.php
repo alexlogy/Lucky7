@@ -71,7 +71,7 @@ class AdminController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user)
+    public function update(Request $request, $id)
     {
       $user = User::find($request->get('id'));
       $user->type = $request->input('type');

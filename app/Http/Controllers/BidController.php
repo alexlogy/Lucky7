@@ -3,15 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bid;
+use App\Models\Paper;
+use App\Models\User;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BidController extends Controller
 {
     public function index()
     {
-        $bid = Bid::latest()->paginate(5);
-        return view('bid.index', compact('bid'))
-            ->with('i', (request()->input('page',1) - 1) * 5);
+      $user = auth()->user();
+
+      //get list of papers that current reviewer has not bid on
+      $toExclude = DB::table('papers')
+        ->join('reviews','reviews.paper_id','=','papers.id')
+        ->select('paper_id')
+        ->where('user_id', '=', $user->id)
+        ->get();
+
+      $eList = array();
+      foreach($toExclude as $te)
+      {
+        foreach($te as $t)
+        {
+          $eList[] = $t;
+        }
+      }
+
+      $paper = DB::table('papers')
+        ->whereNotIn('id', $eList)
+        ->leftJoin('reviews','reviews.paper_id','=','papers.id')
+        ->get();
+      
+      return view('bid.index', compact('paper'), ['user_id'=>$user->id]);
     }
 
     public function create()
@@ -21,13 +46,14 @@ class BidController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' =>'required',
-        ]);
-
-        Bid::create($request->all());
-
+        $user = auth()->user();
+        $rid = $user->id;
+        $paper_id = $request->input('paper_id');
+        if($request->input('bid_status')!==NULL)
+        {
+          Bid::create(['paper_id'=>$paper_id, 'user_id'=>$rid, 'isAwarded'=>TRUE]);
+        }
+      
         return redirect()->route('bid.index')
             ->with('success','Article submitted successfully.');
     }

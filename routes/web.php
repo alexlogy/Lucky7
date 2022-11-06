@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\reviewLimitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,33 +34,14 @@ Route::get('/', function () {
 });
 */
 
-//=======
-Route::get('/', function(){
-  return view('welcome');
-});
-
-/*
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-*/
-
-//>>>>>>> 9ac306103851b177689e0c13ade9de12453f7867
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-//<<<<<<< HEAD
-//=======
 
 Route::resource('admin', AdminController::class);
-//>>>>>>> 9ac306103851b177689e0c13ade9de12453f7867
+Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
 
 Route::resource('review', \App\Http\Controllers\ReviewController::class);
 Route::resource('paper', \App\Http\Controllers\PaperController::class);

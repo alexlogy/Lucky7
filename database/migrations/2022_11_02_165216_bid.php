@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bids', function (Blueprint $table) {
-            $table->id();
+            $table->id('bid');
             $table->foreignIdFor(\App\Models\Paper::class);
             $table->foreignIdFor(\App\Models\User::class);
             //$table->foreign('paper_id')->references('id')->on('papers')->onDelete('cascade');
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('isAwarded');
+            $table->boolean('isAwarded')->nullable();
             $table->timestamps();
         });
     }
