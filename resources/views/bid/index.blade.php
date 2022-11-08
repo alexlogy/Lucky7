@@ -1,4 +1,4 @@
-@extends('paper.layout')
+@extends('bid.layout')
 
 @section('content')
     <div class="pull-left">
@@ -9,7 +9,7 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('paper.create') }}">
-                    Create New Paper
+                    Bid to Review Papers
                 </a>
             </div>
         </div>
@@ -23,31 +23,29 @@
 
     <table class="table table-bordered">
         <tr>
-            <th> No </th>
+            <th> Paper ID </th>
             <th> Title </th>
             <th> Content </th>
+            <th> Reviewer(s) </th>
+            <th> Bid </th>
             <th width="280px"> Action </th>
         </tr>
 
     @foreach ($paper as $paper)
         <tr>
-           <td> {{ $i++ }} </td>
+           <td> {{ $paper->id }} </td>
             <td> {{ $paper->title }} </td>
             <td> {{ $paper->content }} </td>
+            <td> {{ $paper->user_id }} </td>
+          <form action="{{ route('bid.store') }}" method="POST">
+            <input type="hidden" name="paper_id" value="{{ $paper->id }}">
+            <input type="hidden" name="user_id" value="{{ $paper->id }}">
+            <td> <input type="checkbox" id="bid_status" name="bid_status" value="TRUE"> <label for="bid_status">Check to Bid</label> </td>
             <td>
-                <form action="{{ route('paper.destroy', $paper->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('paper.show', $paper->id) }}">
-                        Show
-                    </a>
-
-                    <a class="btn btn-primary" href="{{ route('paper.edit', $paper->id) }}">
-                        Edit
-                    </a>
-
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                    @method('POST')
+                    <button type="submit" class="btn btn-danger">Bid</button>
+          </form>
             </td>
         </tr>
         @endforeach

@@ -9,6 +9,8 @@ class Bid extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'bid';
+
     protected $fillable = [
         'paper_id',
         'user_id',

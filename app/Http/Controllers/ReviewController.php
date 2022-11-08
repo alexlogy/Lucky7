@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use App\Models\Paper;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +19,7 @@ class ReviewController extends Controller
     {
         $user = auth()->user();
         $user_id = $user->id;
+        $user_limit = $user->max_review_no;
         $uname = $user->name;
 
         $userJoin = DB::table('users')
@@ -31,9 +33,10 @@ class ReviewController extends Controller
           print_r($userj);
         }
 
-        //$reviews = Review::latest()->paginate(5);
+        print_r($user_id);
+        print_r($user_limit);
     
-        return view('review.index', compact('userJoin'))
+        return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
 
@@ -103,7 +106,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $rid)
+    public function update(Request $request, $id)
     {
       $review = Review::find($request->get('rid'));
 
@@ -133,4 +136,5 @@ class ReviewController extends Controller
         return redirect()->route('review.index')
             ->with('success','Review deleted successfully');
     }
+
 }

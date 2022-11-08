@@ -41,10 +41,6 @@
             <td> {{ $review->review_rating }} </td>
             <td>
                 <form action="{{ route('review.destroy', $review->rid) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('review.show', $review->rid) }}">
-                        Show
-                    </a>
-
                     <a class="btn btn-primary" href="{{ route('review.edit', $review->rid) }}">
                         Edit
                     </a>
@@ -57,4 +53,17 @@
         </tr>
         @endforeach
     </table>
+    
+    <form action="{{ route('change', $user_id) }}" method="POST">
+      <input type="hidden" name="id" value="{{ $user_id }}">
+      <label>Current review limit: {{ $user_limit_no }}</label><br>
+      <label for="limit">Set new limit:</label><br>
+      <input type="text" id="limit" name="max_review_no">
+      @csrf
+      @method('POST')
+      
+      <input type="submit" value="set">
+      
+    </form>
 
+    @endsection

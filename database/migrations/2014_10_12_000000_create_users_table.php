@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('type')->nullable();
+            $table->integer('max_review_no')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
