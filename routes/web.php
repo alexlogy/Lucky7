@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\reviewLimitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ require __DIR__.'/auth.php';
 
 // routes
 Route::resource('admin', AdminController::class);
+Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
+
 Route::resource('review', \App\Http\Controllers\ReviewController::class);
 Route::resource('paper', \App\Http\Controllers\PaperController::class);
 Route::resource('bid', \App\Http\Controllers\BidController::class);
