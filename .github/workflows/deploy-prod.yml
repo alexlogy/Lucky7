@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Get Github action IP
         id: ip
