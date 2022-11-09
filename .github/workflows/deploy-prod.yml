@@ -32,7 +32,7 @@ jobs:
           remote_port: 22
           remote_user: ${{ secrets.USERNAME }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Running pre-deployment commands
+      - name: Running post-deployment commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER }}
@@ -44,6 +44,7 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
+            chmod -R 775 storage
       - name: Remove Github Actions IP from security group
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ env.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
