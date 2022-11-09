@@ -24,14 +24,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Deploying to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        uses: burnett01/rsync-deployments@5.2.1
         with:
-          username: ${{ secrets.USERNAME }}
-          server: ${{ secrets.SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './*'
+          switches: -avzr --delete --exclude="" --include="" --filter=""
           remote_path: ${{ secrets.REMOTE_PATH }}
-          sftpArgs: '-o ConnectTimeout=5'
+          remote_host: ${{ secrets.SERVER }}
+          remote_port: 22
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Running composer install
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/web
+            composer install
       - name: Remove Github Actions IP from security group
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ env.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32

@@ -21,6 +21,7 @@
 
     <!-- Examples -->
     <script src="js/examples/examples.dashboard.js"></script>
+    <script src="js/examples/examples.modals.js"></script>
 
     </body>
 </html>
