@@ -26,7 +26,7 @@ jobs:
       - name: Deploying to Server
         uses: burnett01/rsync-deployments@5.2.1
         with:
-          switches: -avzr --delete --exclude="" --include="" --filter=""
+          switches: -avzr --delete --exclude=".env" --include="" --filter=""
           remote_path: ${{ secrets.REMOTE_PATH }}
           remote_host: ${{ secrets.SERVER }}
           remote_port: 22
