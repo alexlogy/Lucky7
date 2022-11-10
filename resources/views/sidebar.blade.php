@@ -18,7 +18,7 @@
 
                         <ul class="nav nav-main">
                             <li>
-                                <a class="nav-link" href="layouts-default.html">
+                                <a class="nav-link" href="{{ URL::to('/dashboard') }}">
                                     <i class="bx bx-home-alt" aria-hidden="true"></i>
                                     <span>Dashboard</span>
                                 </a>
@@ -30,17 +30,17 @@
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ URL::to('paper') }}">
                                             Submit Papers
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#">
-                                            List Papers
+                                        <a class="nav-link" href="{{ URL::to('bid') }}">
+                                            Bid Papers
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ URL::to('review') }}">
                                             Review Papers
                                         </a>
                                     </li>

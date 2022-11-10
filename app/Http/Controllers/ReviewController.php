@@ -22,10 +22,9 @@ class ReviewController extends Controller
         $user_limit = $user->max_review_no;
         $uname = $user->name;
 
-        $userJoin = DB::table('users')
-        ->join('reviews','reviews.user_id','=','users.id')
-        ->join('papers','papers.id','=','reviews.paper_id')
-        ->where(['users.id' => $user_id])
+        $userJoin = DB::table('papers')
+        ->join('bids','bids.paper_id','=','papers.pid')
+        ->where(['bids.isAwarded'=>TRUE, 'bids.user_id' => $user_id])
         ->get();
 
         foreach($userJoin as $userj)

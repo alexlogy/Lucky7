@@ -1,8 +1,12 @@
-@extends('paper.layout')
+@extends('app')
+@extends('header')
+@extends('breadcrumbs')
+@extends('sidebar')
+@extends('footer')
 
 @section('content')
     <div class="pull-left">
-        <h2> </h2>
+        <h2> View papers </h2>
     </div>
 
     <div class="row">
@@ -35,12 +39,12 @@
             <td> {{ $paper->title }} </td>
             <td> {{ $paper->content }} </td>
             <td>
-                <form action="{{ route('paper.destroy', $paper->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('paper.show', $paper->id) }}">
+                <form action="{{ route('paper.destroy', $paper->pid) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('paper.show', $paper->pid) }}">
                         Show
                     </a>
 
-                    <a class="btn btn-primary" href="{{ route('paper.edit', $paper->id) }}">
+                    <a class="btn btn-primary" href="{{ route('paper.edit', $paper->pid) }}">
                         Edit
                     </a>
 
@@ -52,4 +56,4 @@
         </tr>
         @endforeach
     </table>
-
+@endsection

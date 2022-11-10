@@ -1,25 +1,27 @@
-@extends('review.layout')
+@extends('app')
+@extends('header')
+@extends('breadcrumbs')
+@extends('sidebar')
+@extends('footer')
 
 @section('content')
     <div class="pull-left">
-        <h2> </h2>
+        <h2> Review Paper</h2>
     </div>
 
     <table class="table table-bordered">
         <tr>
-            <th> No </th>
+        <th> No </th>
             <th> Paper ID </th>
-            <th> Reviewer ID </th>
-            <th> Paper Rating </th>
-            <th> Review </th>
-            <th> Review Rating </th>
+            <th> Paper Title </th>
+            <th> Paper Content </th>
             <th width="280px"> Action </th>
         </tr>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('review.create') }}">
-                    Create New Review
+                    View Reviews
                 </a>
             </div>
         </div>
@@ -34,20 +36,12 @@
     @foreach ($userJoin as $review)
         <tr>
            <td> {{ $i++ }} </td>
+            <td> {{ $review->pid }} </td>
             <td> {{ $review->title }} </td>
-            <td> {{ $review->name }} </td>
-            <td> {{ $review->paper_rating }} </td>
-            <td> {{ $review->review_status }} </td>
-            <td> {{ $review->review_rating }} </td>
+            <td> {{ $review->content }} </td>
             <td>
-                <form action="{{ route('review.destroy', $review->rid) }}" method="POST">
-                    <a class="btn btn-primary" href="{{ route('review.edit', $review->rid) }}">
-                        Edit
-                    </a>
-
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                <form action="{{ route('review.create') }}" method="GET">
+                    <button type="submit" class="btn btn-success">Create Review</button>
                 </form>
             </td>
         </tr>

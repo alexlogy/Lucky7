@@ -1,4 +1,8 @@
-@extends('bid.layout')
+@extends('app')
+@extends('header')
+@extends('breadcrumbs')
+@extends('sidebar')
+@extends('footer')
 
 @section('content')
     <div class="pull-left">
@@ -33,13 +37,13 @@
 
     @foreach ($paper as $paper)
         <tr>
-           <td> {{ $paper->id }} </td>
+           <td> {{ $paper->pid }} </td>
             <td> {{ $paper->title }} </td>
             <td> {{ $paper->content }} </td>
             <td> {{ $paper->user_id }} </td>
           <form action="{{ route('bid.store') }}" method="POST">
-            <input type="hidden" name="paper_id" value="{{ $paper->id }}">
-            <input type="hidden" name="user_id" value="{{ $paper->id }}">
+            <input type="hidden" name="paper_id" value="{{ $paper->pid }}">
+            <input type="hidden" name="user_id" value="{{ $paper->pid }}">
             <td> <input type="checkbox" id="bid_status" name="bid_status" value="TRUE"> <label for="bid_status">Check to Bid</label> </td>
             <td>
                     @csrf
@@ -51,3 +55,4 @@
         @endforeach
     </table>
 
+@endsection

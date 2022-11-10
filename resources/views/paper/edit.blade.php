@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <form action="{{ route('paper.update', $paper->id) }}" method="POST">
+    <form action="{{ route('paper.update', $paper->pid) }}" method="POST">
         @csrf
         @method('PUT')
 

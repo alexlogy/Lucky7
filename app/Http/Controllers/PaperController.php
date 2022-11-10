@@ -52,9 +52,6 @@ class PaperController extends Controller
             ]
         );
 
-        echo $paper_id;
-
-
         $str_arr = explode (";", $request->string('owner'));
         //print_r($str_arr);
 
@@ -67,12 +64,9 @@ class PaperController extends Controller
             );
         }
 
-        //$log = Paper::create($request->all());
-        //$log->save();
-
         //echo $log->string('id');
-        //return redirect()->route('paper.index')
-            //->with('success','Article submitted successfully.');
+        return redirect()->route('paper.index')
+            ->with('success','Article submitted successfully.');
     }
 
     /**

@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paper extends Model
 {
+    protected $primaryKey = 'pid';
+  
     use HasFactory;
+
+
 
     protected $fillable = [
         'title',
