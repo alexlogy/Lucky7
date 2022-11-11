@@ -33,9 +33,14 @@ require __DIR__.'/auth.php';
 Route::resource('admin', AdminController::class);
 Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
 
+Route::resource('cc_bid', \App\Http\Controllers\ConferenceChairBidController::class);
 Route::resource('review', \App\Http\Controllers\ReviewController::class);
+Route::resource('cc_review', \App\Http\Controllers\ConferenceChairReviewController::class);
+
 Route::resource('paper', \App\Http\Controllers\PaperController::class);
 Route::resource('bid', \App\Http\Controllers\BidController::class);
 Route::resource('comment', \App\Http\Controllers\CommentController::class);
 Route::resource('submission', \App\Http\Controllers\SubmissionController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::put('/accept/{id}', [\App\Http\Controllers\ConferenceChairReviewController::class, 'accept'])->name('accept');
+Route::put('/decline/{id}', [\App\Http\Controllers\ConferenceChairReviewController::class, 'decline'])->name('decline');

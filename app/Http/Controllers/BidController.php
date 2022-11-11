@@ -17,8 +17,8 @@ class BidController extends Controller
 
       //get list of papers that current reviewer has not bid on
       $toExclude = DB::table('papers')
-        ->join('bids','bids.paper_id','=','papers.pid')
-        ->select('paper_id')
+        ->join('bids','bids.paper_pid','=','papers.pid')
+        ->select('paper_pid')
         ->where('user_id', '=', $user->id)
         ->get();
 
@@ -33,9 +33,9 @@ class BidController extends Controller
 
       $paper = DB::table('papers')
         ->whereNotIn('pid', $eList)
-        ->leftJoin('reviews','reviews.paper_id','=','papers.pid')
+        ->leftJoin('reviews','reviews.paper_pid','=','papers.pid')
         ->get();
-      
+
       return view('bid.index', compact('paper'), ['user_id'=>$user->id]);
     }
 
@@ -49,11 +49,14 @@ class BidController extends Controller
         $user = auth()->user();
         $rid = $user->id;
         $paper_id = $request->input('paper_id');
+
+
         if($request->input('bid_status')!==NULL)
         {
-          Bid::create(['paper_id'=>$paper_id, 'user_id'=>$rid, 'isAwarded'=>FALSE]);
+            DB::table('bids')->insert(['paper_pid'=>$paper_id, 'user_id'=>$rid, 'isAwarded'=>FALSE]);
+          //Bid::create(['paper_pid'=>$paper_id, 'user_id'=>$rid, 'isAwarded'=>FALSE]);
         }
-      
+
         return redirect()->route('bid.index')
             ->with('success','Article submitted successfully.');
     }

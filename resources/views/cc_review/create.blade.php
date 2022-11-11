@@ -36,10 +36,9 @@
                 <div class="form-group">
                    <strong> Paper Id </strong>
                     <select name="paper_id" class="form-control">
-                        <option selected default=""> --- Please select paper id here ---</option>;
                         <?php
                             use Illuminate\Support\Facades\DB;
-
+                            echo "<option value='' selected> --- Please select paper id here ---</option>";
                             $user = auth()->user();
                             $user_id = $user->id;
 
@@ -50,7 +49,7 @@
                                         ->get();
 
                             foreach($papers AS $papers) {
-                                echo "<option value='$papers->pid'> $papers->title </option>";
+                                echo "<option value='$papers->pid '> $papers->title </option>";
                             }
                         ?>
                     </select>

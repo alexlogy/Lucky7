@@ -49,6 +49,7 @@ class PaperController extends Controller
             [
                 'title' => $request->string('title'),
                 'content' => $request->string('content'),
+                'paper_status' => "New",
             ]
         );
 
@@ -58,7 +59,7 @@ class PaperController extends Controller
         foreach($str_arr AS $str) {
             DB::table('submissions')->insertGetId(
                 [
-                    'paper_id' => $paper_id,
+                    'paper_pid' => $paper_id,
                     'user_id' => $str,
                 ]
             );

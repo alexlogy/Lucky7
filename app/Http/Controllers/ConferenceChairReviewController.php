@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ReviewController extends Controller
+class ConferenceChairReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,26 +17,10 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $user_id = $user->id;
-        $user_limit = $user->max_review_no;
-        $uname = $user->name;
+        $paper_reviewed = DB::table('papers as p')
+                            ->get();
 
-        $userJoin = DB::table('papers')
-        ->join('bids','bids.paper_pid','=','papers.pid')
-        ->where(['bids.isAwarded'=>TRUE, 'bids.user_id' => $user_id])
-        ->get();
-
-        foreach($userJoin as $userj)
-        {
-          print_r($userj);
-        }
-
-        print_r($user_id);
-        print_r($user_limit);
-
-        return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])
-            ->with('i', (request()->input('page',1) - 1) * 5);
+        return view('cc_review.index', compact('paper_reviewed'));
     }
 
     /**
@@ -47,7 +31,7 @@ class ReviewController extends Controller
     public function create()
     {
       $user = auth()->user();
-      return view('review.create', compact('user'));
+      return view('cc_review.create', compact('user'));
     }
 
     /**
@@ -63,22 +47,9 @@ class ReviewController extends Controller
             'user_id' =>'required',
         ]);
 
-        echo $request->string('paper_id');
+        Review::create($request->all());
 
-        DB::table('reviews')->insert([
-            'paper_pid' => $request->string('paper_id'),
-            'user_id' => $request->string('user_id'),
-            'paper_rating' => $request->string('paper_rating'),
-            'review_status' => $request->string('review_status'),
-            'review_rating' => $request->string('review_rating'),
-            'created_at' => now(),
-        ]);
-
-        DB::table('papers')
-            ->where('pid', '=', $request->string('paper_id'))
-            ->update(['paper_status' => 'review']);
-
-        return redirect()->route('review.index')
+        return redirect()->route('cc_review.index')
             ->with('success','Review completed successfully.');
     }
 
@@ -90,7 +61,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        return view('review.show',compact('review'));
+        return view('cc_review.show',compact('review'));
     }
 
     /**
@@ -108,7 +79,7 @@ class ReviewController extends Controller
         $review = $review[0];
 
         print_r($review);
-        return view('review.edit',compact('review'));
+        return view('cc_review.edit',compact('review'));
     }
 
     /**
@@ -128,7 +99,7 @@ class ReviewController extends Controller
       $review->review_rating = $request->input('review_rating');
       $review->save();
 
-        return redirect()->route('review.index')
+        return redirect()->route('cc_review.index')
             ->with('success','Review updated successfully');
     }
 
@@ -145,8 +116,25 @@ class ReviewController extends Controller
 
       //$review->delete();
 
-        return redirect()->route('review.index')
+        return redirect()->route('cc_review.index')
             ->with('success','Review deleted successfully');
     }
 
+    public function accept($id) {
+        DB::table('papers')
+            ->where('pid', '=', $id)
+            ->update(['paper_status'=>"Accepted"]);
+
+        return redirect()->route('cc_review.index')
+            ->with('success','Paper status update to accepted successfully');
+    }
+
+    public function decline($id) {
+        DB::table('papers')
+            ->where('pid', '=', $id)
+            ->update(['paper_status'=>"Declined"]);
+
+        return redirect()->route('cc_review.index')
+            ->with('success','Paper status update to declined successfully');
+    }
 }
