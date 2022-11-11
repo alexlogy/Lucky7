@@ -39,12 +39,12 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/web
+            cd /home/${{ secrets.USERNAME }}/web
             composer install --optimize-autoloader --no-dev
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            chown -R alex:www-data ~/web
+            chown -R alex:www-data /home/${{ secrets.USERNAME }}/web
             chmod -R 775 storage
       - name: Remove Github Actions IP from security group
         run: |
