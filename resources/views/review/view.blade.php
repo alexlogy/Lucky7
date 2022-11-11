@@ -9,7 +9,7 @@
         <h2> View Reviews </h2>
     </div>
     <div class="pull-right">
-        <a class="btn btn-primary" href="{{ route('review.index') }}"> Back </a>
+        <a class="btn btn-primary" href="{{ route('viewReviews') }}"> Back </a>
     </div>
 
     @if($message = Session::get('success'))
@@ -35,14 +35,18 @@
             <td> {{ $review->review_status }} </td>
             <td>
                 <form action="{{ route('review.destroy', $review->rid) }}" method="POST">
+                    <input type="hidden" name="paper_id" value="{{ $review->paper_id }}">
                     <a class="btn btn-primary" href="{{ route('review.edit', $review->rid) }}">
                         Edit
                     </a>
-
                     @csrf
-                    @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
+                <form action="{{ route('addComment') }}" method="GET">
+                    <input type="hidden" name="paper_id" value="{{ $review->paper_id }}">
+                    <button type="submit" class="btn btn-primary">Comment</button>
+                </form>
+
             </td>
         </tr>
         @endforeach

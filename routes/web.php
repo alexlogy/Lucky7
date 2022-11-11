@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\reviewLimitController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ require __DIR__.'/auth.php';
 Route::resource('admin', AdminController::class);
 Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
 Route::get('/viewReviews', [ReviewController::class, 'viewReviews'])->name('viewReviews');
+Route::get('/addComment', [CommentController::class, 'addComment'])->name('addComment');
 
 Route::resource('review', \App\Http\Controllers\ReviewController::class);
 Route::resource('paper', \App\Http\Controllers\PaperController::class);

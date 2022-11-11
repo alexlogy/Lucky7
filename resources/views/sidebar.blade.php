@@ -44,6 +44,11 @@
                                             Review Papers
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ URL::to('viewReviews') }}">
+                                            View Reviews and Comment
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-parent">

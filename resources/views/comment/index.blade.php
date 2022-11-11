@@ -8,8 +8,8 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('paper.create') }}">
-                    Create New Paper
+                <a class="btn btn-success" href="{{ route('comment.create') }}">
+                    Create New Comment
                 </a>
             </div>
         </div>
@@ -29,18 +29,18 @@
             <th width="280px"> Action </th>
         </tr>
 
-    @foreach ($paper as $paper)
+    @foreach ($comment as $comment)
         <tr>
            <td> {{ $i++ }} </td>
-            <td> {{ $paper->title }} </td>
-            <td> {{ $paper->content }} </td>
+            <td> {{ $comment->paper_id }} </td>
+            <td> {{ $comment->user_id }} </td>
             <td>
-                <form action="{{ route('paper.destroy', $paper->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('paper.show', $paper->id) }}">
+                <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('comment.show', $comment->id) }}">
                         Show
                     </a>
 
-                    <a class="btn btn-primary" href="{{ route('paper.edit', $paper->id) }}">
+                    <a class="btn btn-primary" href="{{ route('comment.edit', $comment->id) }}">
                         Edit
                     </a>
 
