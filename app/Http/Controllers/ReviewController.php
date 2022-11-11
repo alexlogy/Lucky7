@@ -22,18 +22,21 @@ class ReviewController extends Controller
         $user_limit = $user->max_review_no;
         $uname = $user->name;
 
+        //Find papers that have been reviewed
+        $reviewed_papers = DB::table('reviews')->get();
+        $reviewed_paper_ID = array();
+        foreach($reviewed_papers as $rp)
+        {
+          $reviewed_paper_ID[]=$rp->paper_id;
+        }
+
+        //get papers that have not been reviewed yet to be displayed to user
         $userJoin = DB::table('papers')
         ->join('bids','bids.paper_id','=','papers.pid')
         ->where(['bids.isAwarded'=>TRUE, 'bids.user_id' => $user_id])
+        ->whereNotIn('bids.paper_id', $reviewed_paper_ID)
         ->get();
 
-        foreach($userJoin as $userj)
-        {
-          print_r($userj);
-        }
-
-        print_r($user_id);
-        print_r($user_limit);
     
         return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])
             ->with('i', (request()->input('page',1) - 1) * 5);
@@ -44,10 +47,11 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-      $user = auth()->user();  
-      return view('review.create', compact('user'));
+      $user = auth()->user();
+      $pid = $request->input('paper_id');
+      return view('review.create', compact('user'), ['pid'=>$pid]);
     }
 
     /**
@@ -94,7 +98,6 @@ class ReviewController extends Controller
 
         $review = $review[0];
 
-        print_r($review);
         return view('review.edit',compact('review'));
     }
 
@@ -109,10 +112,8 @@ class ReviewController extends Controller
     {
       $review = Review::find($request->get('rid'));
 
-      //$review = $review[0];
       $review->paper_rating = $request->input('paper_rating');
       $review->review_status = $request->input('review_status');
-      $review->review_rating = $request->input('review_rating');
       $review->save();
 
         return redirect()->route('review.index')
@@ -129,11 +130,28 @@ class ReviewController extends Controller
     {
       $r = Review::where('rid','=',$review);
       $r->delete();  
-      
-      //$review->delete();
 
-        return redirect()->route('review.index')
+      $user = auth()->user();
+      $reviews = Review::where('user_id','=',$user->id)->get(); 
+
+
+      return view('review.view', compact('reviews'))
             ->with('success','Review deleted successfully');
+    }
+
+    /**
+     * Show table of reviews for user to edit or delete
+     *
+     * @param  \App\Models\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function viewReviews()
+    {
+      $user = auth()->user();
+      $reviews = Review::where('user_id','=',$user->id)->get(); 
+
+        return view('review.view', compact('reviews'))
+            ->with('success','List successful');
     }
 
 }

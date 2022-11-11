@@ -55,7 +55,7 @@ class BidController extends Controller
         }
       
         return redirect()->route('bid.index')
-            ->with('success','Article submitted successfully.');
+            ->with('success','Bid submitted successfully.');
     }
 
     public function show(Bid $bid)

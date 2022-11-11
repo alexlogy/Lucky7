@@ -32,6 +32,7 @@ require __DIR__.'/auth.php';
 // routes
 Route::resource('admin', AdminController::class);
 Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
+Route::get('/viewReviews', [ReviewController::class, 'viewReviews'])->name('viewReviews');
 
 Route::resource('review', \App\Http\Controllers\ReviewController::class);
 Route::resource('paper', \App\Http\Controllers\PaperController::class);

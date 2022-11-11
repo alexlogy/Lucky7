@@ -4,7 +4,7 @@
 @extends('../sidebar')
 @extends('../footer')
 
-@section('title', 'List Users')
+@section('title', 'Manage Users')
 
 @section('content')
     <div class="row">
@@ -25,6 +25,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -34,14 +35,15 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->type }}</td>
                                     <td>
                                         <form action="{{ route('admin.destroy', $user) }}" method="post" id="delete-item">
-{{--                                            <a href="{{ route('admin.edit', $user) }}" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>--}}
-                                            <a href="#modalAnim" class="on-default edit-row modal-with-zoom-anim"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="{{ route('admin.edit', $user) }}" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
+{{--                                            <a href="#modalAnim" class="on-default edit-row modal-with-zoom-anim"><i class="fas fa-pencil-alt"></i></a> --}}
                                             @csrf
                                             @method('DELETE')
-                                            <a href="javascript:document.getElementById('delete-item').submit();" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
-{{--                                            <button type="submit">Delete</button>--}}
+{{--                                            <a href="javascript:document.getElementById('delete-item').submit();" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>  --}}
+                                            <button type="submit">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

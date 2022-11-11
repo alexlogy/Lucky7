@@ -34,7 +34,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong> Paper Id: </strong>
-                    <input type="text" name="paper_id" value="{{ $review->paper_id }}" class="form-control" placeholder="Paper Id">
+                    <input type="text" disabled name="paper_id" value="{{ $review->paper_id }}" class="form-control" placeholder="Paper Id">
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong> User Id: </strong>
-                    <input type="text" name="user_id" value="{{ $review->user_id }}" class="form-control" placeholder="User Id">
+                    <strong> Reviewer Id: </strong>
+                    <input type="text" disabled name="user_id" value="{{ $review->user_id }}" class="form-control" placeholder="User Id">
                 </div>
             </div>
         </div>
@@ -62,15 +62,6 @@
                 <div class="form-group">
                     <strong> Review: </strong>
                     <input type="text" name="review_status" value="{{ $review->review_status }}" class="form-control" placeholder="Review Status">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong> Review Rating: </strong>
-                    <input type="text" name="review_rating" value="{{ $review->review_rating }}" class="form-control" placeholder="Review Rating">
                 </div>
             </div>
         </div>

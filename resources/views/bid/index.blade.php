@@ -6,17 +6,7 @@
 
 @section('content')
     <div class="pull-left">
-        <h2> </h2>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('paper.create') }}">
-                    Bid to Review Papers
-                </a>
-            </div>
-        </div>
+        <h2>Bid Papers </h2>
     </div>
 
     @if($message = Session::get('success'))
@@ -44,7 +34,7 @@
           <form action="{{ route('bid.store') }}" method="POST">
             <input type="hidden" name="paper_id" value="{{ $paper->pid }}">
             <input type="hidden" name="user_id" value="{{ $paper->pid }}">
-            <td> <input type="checkbox" id="bid_status" name="bid_status" value="TRUE"> <label for="bid_status">Check to Bid</label> </td>
+            <td> <input type="checkbox" required id="bid_status" name="bid_status" value="TRUE"> <label for="bid_status">Check to Bid</label> </td>
             <td>
                     @csrf
                     @method('POST')

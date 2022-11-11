@@ -53,13 +53,8 @@
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
-                                        <a class="nav-link" href="#">
-                                            Create User
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="{{ URL::to('/admin') }}">
-                                            List Users
+                                        <a class="nav-link" href="{{ URL::to('admin') }}">
+                                            Manage User
                                         </a>
                                     </li>
                                 </ul>

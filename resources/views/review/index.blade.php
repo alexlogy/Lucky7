@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('review.create') }}">
+                <a class="btn btn-success" href="{{ route('viewReviews') }}">
                     View Reviews
                 </a>
             </div>
@@ -41,6 +41,7 @@
             <td> {{ $review->content }} </td>
             <td>
                 <form action="{{ route('review.create') }}" method="GET">
+                    <input type="hidden" name="paper_id" value="{{ $review->pid }}">
                     <button type="submit" class="btn btn-success">Create Review</button>
                 </form>
             </td>

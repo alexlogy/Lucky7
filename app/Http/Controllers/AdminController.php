@@ -16,6 +16,13 @@ class AdminController extends Controller
     public function index()
     {
       $users = User::latest()->paginate(10);
+
+      foreach($users as $user){
+        if ($user->type === NULL)
+        {
+          $user->type = "unassigned";
+        }
+      }
       
       return view('admin.index', compact('users'));
     }

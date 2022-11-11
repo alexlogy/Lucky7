@@ -35,14 +35,14 @@
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
                    <strong> Paper Id </strong>
-                    <input type="text" name="paper_id" class="form-control" placeholder="Paper Id">
+                    <input type="text" read-only name="paper_id" class="form-control" placeholder="Paper Id" value="{{ $pid }}">
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
                     <strong> Reviewer Id </strong>
-                    <input type="text" name="user_id" class="form-control" value="{{ $user->id }}">
+                    <input type="text" read-only name="user_id" class="form-control" value="{{ $user->id }}">
                 </div>
             </div>
 
@@ -57,13 +57,6 @@
                 <div class="form-group">
                     <strong> Review Status </strong>
                     <input type="text" name="review_status" class="form-control" placeholder="Review Status">
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-sm-12">
-                <div class="form-group">
-                    <strong> Review Rating </strong>
-                    <input type="text" name="review_rating" class="form-control" placeholder="Review Rating">
                 </div>
             </div>
 
