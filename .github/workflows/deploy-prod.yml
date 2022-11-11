@@ -44,8 +44,6 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            chown -R alex:www-data /home/${{ secrets.USERNAME }}/web
-            chmod -R 775 storage
       - name: Remove Github Actions IP from security group
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ env.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
