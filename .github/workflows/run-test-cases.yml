@@ -3,7 +3,7 @@ name: Run Test Cases
 on:
   workflow_dispatch:
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Running Test Cases
