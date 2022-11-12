@@ -32,9 +32,9 @@
                 <div class="dropdown-menu">
                     <ul class="list-unstyled mb-2">
                         <li class="divider"></li>
-                        <li>
-                            <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="bx bx-user-circle"></i> My Profile</a>--}}
+{{--                        </li>--}}
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
