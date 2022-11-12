@@ -34,7 +34,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong> Paper Id: </strong>
-                    <input type="text" disabled name="paper_id" value="{{ $review->paper_id }}" class="form-control" placeholder="Paper Id">
+                    <input type="text" disabled name="paper_id" value="{{ $review->paper_pid }}" class="form-control" placeholder="Paper Id">
                 </div>
             </div>
         </div>
