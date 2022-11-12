@@ -29,11 +29,14 @@
                                     <span>Papers</span>
                                 </a>
                                 <ul class="nav nav-children">
+                                    @if(session('user_details')['user']['type'] == "Author" or session('user_details')['user']['type'] == "Admin")
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('paper') }}">
                                             Submit Papers
                                         </a>
                                     </li>
+                                    @endif
+                                    @if(session('user_details')['user']['type'] == "Reviewer" or session('user_details')['user']['type'] == "Admin")
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('bid') }}">
                                             Bid Papers
@@ -44,6 +47,7 @@
                                             Review Papers
                                         </a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('viewReviews') }}">
                                             View Reviews and Comment
