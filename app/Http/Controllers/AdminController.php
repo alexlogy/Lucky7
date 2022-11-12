@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Input;
@@ -83,6 +84,8 @@ class AdminController extends Controller
       $user = User::find($request->get('id'));
       $user->type = $request->get('type');
       $user->save();
+
+      Helper::updateDetailsToSessions();    // update details to sessions
 
       return redirect()->route('admin.index')
                        ->with('success','User updated successfully');
