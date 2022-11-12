@@ -1,48 +1,73 @@
-@extends('app')
-@extends('header')
-@extends('breadcrumbs')
-@extends('sidebar')
-@extends('footer')
+@extends('../app')
+@extends('../breadcrumbs')
+@extends('../header')
+@extends('../sidebar')
+@extends('../footer')
+
+@section('title', 'Bid Papers')
 
 @section('content')
-    <div class="pull-left">
-        <h2>Bid Papers </h2>
-    </div>
+    <div class="row">
+        <div class="col">
+            <section class="card">
+                <header class="card-header">
+                    <div class="card-actions">
+                        <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                    </div>
 
-    @if($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+                    <h2 class="card-title">@yield('title')</h2>
+                </header>
+                <div class="card-body">
+                    <!-- Alerts Block -->
+                    @if($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${{ $message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true" aria-label="Close"></button>
+                        </div>
+                    @elseif($message = Session::get('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            ${{ $message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <!-- End of Alerts Block -->
+                    <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <thead>
+                        <tr>
+                            <th>Paper ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Reviewer(s)</th>
+                            <th>Bid</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($paper as $papers)
+                            <tr>
+                                <td>{{ $paper->pid }}</td>
+                                <td>{{ $paper->title }}</td>
+                                <td>{{ $paper->content }}</td>
+                                <td>{{ $paper->user_id }}</td>
+                                <!-- Actions -->
+                                <form action="{{ route('bid.store') }}" method="POST">
+                                    <input type="hidden" name="paper_id" value="{{ $paper->pid }}">
+                                    <input type="hidden" name="user_id" value="{{ $paper->pid }}">
+                                <td>
+                                    <input type="checkbox" required id="bid_status" name="bid_status" value="TRUE"> <label for="bid_status">Check to Bid</label>
+                                </td>
+                                <td>
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" class="btn btn-danger">Bid</button>
+                                </td>
+                                </form>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    @endif
-
-    <table class="table table-bordered">
-        <tr>
-            <th> Paper ID </th>
-            <th> Title </th>
-            <th> Content </th>
-            <th> Reviewer(s) </th>
-            <th> Bid </th>
-            <th width="280px"> Action </th>
-        </tr>
-
-    @foreach ($paper as $paper)
-        <tr>
-           <td> {{ $paper->pid }} </td>
-            <td> {{ $paper->title }} </td>
-            <td> {{ $paper->content }} </td>
-            <td> {{ $paper->user_id }} </td>
-          <form action="{{ route('bid.store') }}" method="POST">
-            <input type="hidden" name="paper_id" value="{{ $paper->pid }}">
-            <input type="hidden" name="user_id" value="{{ $paper->pid }}">
-            <td> <input type="checkbox" required id="bid_status" name="bid_status" value="TRUE"> <label for="bid_status">Check to Bid</label> </td>
-            <td>
-                    @csrf
-                    @method('POST')
-                    <button type="submit" class="btn btn-danger">Bid</button>
-          </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-
+    </div>
 @endsection

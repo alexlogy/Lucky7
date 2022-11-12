@@ -32,12 +32,12 @@ class ReviewController extends Controller
 
         //get papers that have not been reviewed yet to be displayed to user
         $userJoin = DB::table('papers')
-        ->join('bids','bids.paper_id','=','papers.pid')
+        ->join('bids','bids.paper_pid','=','papers.pid')
         ->where(['bids.isAwarded'=>TRUE, 'bids.user_id' => $user_id])
         ->whereNotIn('bids.paper_id', $reviewed_paper_ID)
         ->get();
 
-    
+
         return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
@@ -129,10 +129,10 @@ class ReviewController extends Controller
     public function destroy($review)
     {
       $r = Review::where('rid','=',$review);
-      $r->delete();  
+      $r->delete();
 
       $user = auth()->user();
-      $reviews = Review::where('user_id','=',$user->id)->get(); 
+      $reviews = Review::where('user_id','=',$user->id)->get();
 
 
       return view('review.view', compact('reviews'))
@@ -148,7 +148,7 @@ class ReviewController extends Controller
     public function viewReviews()
     {
       $user = auth()->user();
-      $reviews = Review::where('user_id','=',$user->id)->get(); 
+      $reviews = Review::where('user_id','=',$user->id)->get();
 
         return view('review.view', compact('reviews'))
             ->with('success','List successful');
