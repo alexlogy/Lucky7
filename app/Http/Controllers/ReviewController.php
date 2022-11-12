@@ -32,9 +32,9 @@ class ReviewController extends Controller
 
         //get papers that have not been reviewed yet to be displayed to user
         $userJoin = DB::table('papers')
-        ->join('bids','bids.paper_id','=','papers.pid')
+        ->join('bids','bids.paper_pid','=','papers.pid')
         ->where(['bids.isAwarded'=>TRUE, 'bids.user_id' => $user_id])
-        ->whereNotIn('bids.paper_id', $reviewed_paper_ID)
+        ->whereNotIn('bids.paper_pid', $reviewed_paper_ID)
         ->get();
 
         return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])

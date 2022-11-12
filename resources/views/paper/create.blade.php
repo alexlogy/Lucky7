@@ -1,4 +1,10 @@
-@extends('paper.layout')
+@extends('../app')
+@extends('../breadcrumbs')
+@extends('../header')
+@extends('../sidebar')
+@extends('../footer')
+
+@section('title', 'Submit Paper')
 
 @section('content')
     <div class="row">

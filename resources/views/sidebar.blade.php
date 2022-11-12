@@ -51,6 +51,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            @if(session('user_details')['user']['type'] == "Conference Chair" or session('user_details')['user']['type'] == "Admin")
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
                                     <i class="bx bx-user" aria-hidden="true"></i>
@@ -69,6 +70,8 @@
                                     </li>
                                 </ul>
                             </li>
+                            @endif
+                            @if(session('user_details')['user']['type'] == "Admin")
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
                                     <i class="bx bx-user" aria-hidden="true"></i>
@@ -82,6 +85,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            @endif
                         </ul>
                     </nav>
 

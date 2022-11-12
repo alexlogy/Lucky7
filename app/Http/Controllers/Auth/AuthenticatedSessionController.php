@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         // Set user details in session
         $user_details = array();
         $user_details['id'] = Auth::id();
-        $user_details['user'] = Auth::user();
+        $user_details['user'] = Auth::user()->fresh();
 
         $request->session()->put('user_details', $user_details);
 
