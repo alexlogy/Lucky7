@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('pid');
             $table->string('title');
             $table->string('content');
+            $table->string('paper_status');
             $table->timestamps();
         });
     }

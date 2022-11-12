@@ -17,8 +17,8 @@ class BidController extends Controller
 
       //get list of papers that current reviewer has not bid on
       $toExclude = DB::table('papers')
-        ->join('bids','bids.paper_pid','=','papers.pid')
-        ->select('paper_pid')
+        ->join('bids','bids.paper_id','=','papers.pid')
+        ->select('paper_id')
         ->where('user_id', '=', $user->id)
         ->get();
 
@@ -33,7 +33,7 @@ class BidController extends Controller
 
       $paper = DB::table('papers')
         ->whereNotIn('pid', $eList)
-        ->leftJoin('reviews','reviews.paper_pid','=','papers.pid')
+        ->leftJoin('reviews','reviews.paper_id','=','papers.pid')
         ->get();
 
       return view('bid.index', compact('paper'), ['user_id'=>$user->id]);

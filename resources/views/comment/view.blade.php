@@ -18,9 +18,6 @@
         </div>
     @endif
     
-    <div class="pull-left">
-        <h3> About this paper... </h3>
-    </div>
     <table class="table table-bordered">
         <tr>
             <th> Paper ID </th>

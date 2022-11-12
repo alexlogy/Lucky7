@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Paper::class);
             $table->foreignIdFor(\App\Models\User::class);
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            //$table->foreign('paper_id')->references('id')->on('papers')->onDelete('cascade');
             $table->timestamps();
         });
     }

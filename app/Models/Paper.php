@@ -16,5 +16,6 @@ class Paper extends Model
     protected $fillable = [
         'title',
         'content',
+        'paper_status',
     ];
 }
