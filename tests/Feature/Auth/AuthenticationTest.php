@@ -22,7 +22,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('https://lucky7.privatenodes.io/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -35,7 +35,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('https://lucky7.privatenodes.io/login', [
+        $this->post('/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
