@@ -49,7 +49,7 @@ class PaperController extends Controller
             [
                 'title' => $request->string('title'),
                 'content' => $request->string('content'),
-                'paper_status' => 0,
+                'paper_status' => "Pending",
             ]
         );
 
