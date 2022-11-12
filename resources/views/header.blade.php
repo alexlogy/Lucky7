@@ -193,7 +193,7 @@
                         <img src="{{ asset('img/!logged-user.jpg') }}" alt="Joseph Doe" class="rounded-circle" data-lock-picture="{{ asset('img/!logged-user.jpg') }}" />
                     </figure>
                     <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-                        <span class="name">John Doe Junior</span>
+                        <span class="name">{{ session('user_details')['user']['name'] }}</span>
                         <span class="role">Administrator</span>
                     </div>
 
