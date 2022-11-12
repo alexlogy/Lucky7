@@ -2,14 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Paper;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\Models\Paper;
-use App\Models\User;
 
-class PaperSeeder extends Seeder
+class BidSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,15 +20,10 @@ class PaperSeeder extends Seeder
     {
         // seed 100 times
         for ($i = 0; $i <= 100; $i++) {
-            DB::table('papers')->insert([
-                'title' => Str::random(20),
-                'content' => Str::random(200),
-                'paper_status' => "Pending",
-            ]);
-
-            DB::table('submissions')->insert([
+            DB::table('bids')->insert([
                 'paper_pid' => Paper::inRandomOrder()->first()->pid,
                 'user_id' => User::inRandomOrder()->first()->id,
+                'isAwarded' => rand(0, 1),
             ]);
         }
     }

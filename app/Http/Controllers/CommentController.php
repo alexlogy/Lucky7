@@ -11,7 +11,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comment = Comment::latest()->paginate(5);
+        $comment = Comment::all();
         return view('comment.index', compact('comment'))
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
@@ -27,7 +27,7 @@ class CommentController extends Controller
         $user=auth()->user();
         $paper_id = $request->input('paper_id');
         $comment = $request->input('new_comment');
-        
+
         Comment::create(['paper_id'=>$paper_id, 'user_id'=>$user->id, 'comment'=>$comment]);
 
         return redirect()->route('addComment', ['paper_id'=>$paper_id]);
@@ -69,8 +69,8 @@ class CommentController extends Controller
       $paperID = $request->input('paper_id');
       $paper = Paper::find($paperID);
 
-      $reviews = Review::where('paper_id', '=', $paperID)->get();
-      $comments = Comment::where('paper_id', '=', $paperID)->get();
+      $reviews = Review::where('paper_pid', '=', $paperID)->get();
+      $comments = Comment::where('paper_pid', '=', $paperID)->get();
 
       return view('comment.view', compact('paper', 'comments', 'reviews'));
     }
