@@ -23,7 +23,7 @@ class AdminController extends Controller
           $user->type = "unassigned";
         }
       }
-      
+
       return view('admin.index', compact('users'));
     }
 
@@ -66,7 +66,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { 
+    {
       $user = User::find($id);
       return view('admin.edit', compact('user'));
     }
@@ -81,9 +81,9 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
       $user = User::find($request->get('id'));
-      $user->type = $request->input('type');
+      $user->type = $request->get('type');
       $user->save();
-    
+
       return redirect()->route('admin.index')
                        ->with('success','User updated successfully');
     }

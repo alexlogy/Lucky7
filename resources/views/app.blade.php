@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="{{ asset('vendor/jquery-ui/jquery-ui.theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-multiselect/css/bootstrap-multiselect.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/morris/morris.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-multiselect/css/bootstrap-multiselect.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" />
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}" />

@@ -1,8 +1,10 @@
-@extends('app')
-@extends('header')
-@extends('breadcrumbs')
-@extends('sidebar')
-@extends('footer')
+@extends('../app')
+@extends('../breadcrumbs')
+@extends('../header')
+@extends('../sidebar')
+@extends('../footer')
+
+@section('title', 'Review Paper')
 
 @section('content')
     <div class="pull-left">
@@ -48,7 +50,7 @@
         </tr>
         @endforeach
     </table>
-    
+
     <form action="{{ route('change', $user_id) }}" method="POST">
       <input type="hidden" name="id" value="{{ $user_id }}">
       <label>Current review limit: {{ $user_limit_no }}</label><br>
@@ -56,9 +58,9 @@
       <input type="text" id="limit" name="max_review_no">
       @csrf
       @method('POST')
-      
+
       <input type="submit" value="set">
-      
+
     </form>
 
     @endsection

@@ -64,24 +64,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-parent">
-                                <a class="nav-link" href="#">
-                                    <i class="bx bx-cog" aria-hidden="true"></i>
-                                    <span>Settings</span>
-                                </a>
-                                <ul class="nav nav-children">
-                                    <li>
-                                        <a class="nav-link" href="#">
-                                            Menu Items
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="#">
-                                            Role Permission
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                     </nav>
 
