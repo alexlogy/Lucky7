@@ -37,8 +37,6 @@ class ReviewController extends Controller
         ->whereNotIn('bids.paper_id', $reviewed_paper_ID)
         ->get();
 
-        print(json_encode(session()->all()));
-
         return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
