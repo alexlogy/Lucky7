@@ -6,14 +6,12 @@
             <div class="right-wrapper text-end">
                 <ol class="breadcrumbs">
                     <li>
-                        <a href="index.html">
+                        <a href="{{ route('dashboard') }}">
                             <i class="bx bx-home-alt"></i>
                         </a>
                     </li>
 
-                    <li><span>Layouts</span></li>
-
-                    <li><span>Default</span></li>
+                    <li><span>{{ request()->path() }}</span></li>
 
                 </ol>
 
