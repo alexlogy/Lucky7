@@ -42,7 +42,9 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'type' => 'Author', // default author
             'password' => Hash::make($request->password),
+            'max_review_no' => 3,
         ]);
 
         event(new Registered($user));
