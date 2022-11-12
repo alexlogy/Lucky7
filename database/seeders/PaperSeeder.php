@@ -19,7 +19,7 @@ class PaperSeeder extends Seeder
             DB::table('papers')->insert([
                 'title' => Str::random(8),
                 'content' => Str::random(10),
-                'paper_status' => $user_types[array_rand($user_types, 1)],
+                'paper_status' => 0,
             ]);
         }
     }
