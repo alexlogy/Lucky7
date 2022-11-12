@@ -102,23 +102,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($paper as $papers)
+                        @foreach ($paper as $paper)
                             <tr>
                                 <td>{{ $paper->pid }}</td>
                                 <td>{{ $paper->title }}</td>
                                 <td>{{ $paper->content }}</td>
-                                <td>{{ $paper->user_id }}</td>
                                 <!-- Actions -->
                                 <td>
                                     <form action="{{ route('paper.destroy', $paper->pid) }}" method="POST">
-{{--                                        <a class="btn btn-info" href="{{ route('paper.show', $paper->pid) }}">--}}
-{{--                                            Show--}}
-{{--                                        </a>--}}
-                                        <a href="{{ route('paper.show', $paper->pid) }}" class="mb-1 mt-1 me-1 btn btn-info n-default"><i class="fas fa-magnifying-glass"></i></a>
                                         <a href="{{ route('paper.edit', $paper->pid) }}" class="mb-1 mt-1 me-1 btn btn-primary n-default edit-row"><i class="fas fa-pencil-alt"></i></a>
-{{--                                        <a class="btn btn-primary" href="{{ route('paper.edit', $paper->pid) }}">--}}
-{{--                                            Edit--}}
-{{--                                        </a>--}}
 
                                         @csrf
                                         @method('DELETE')

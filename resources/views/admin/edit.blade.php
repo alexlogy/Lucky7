@@ -32,7 +32,7 @@
                       <option value="Conference Chair">Conference Chair</option>
                       <option value="Author">Author</option>
                       <option value="Reviewer">Reviewer</option>
-                      <option value="Both">Author and Reviewer</option>
+                      <option value="Admin">Admin</option>
                     </select>
                 </div>
             </div>

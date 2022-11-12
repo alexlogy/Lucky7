@@ -66,6 +66,24 @@
                             </li>
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
+                                    <i class="bx bx-user" aria-hidden="true"></i>
+                                    <span>Conference Chair</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a class="nav-link" href="{{ URL::to('/cc_bid') }}">
+                                            Reviewer Assign
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="{{ URL::to('/cc_review') }}">
+                                            Accept / Reject Paper
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
                                     <i class="bx bx-cog" aria-hidden="true"></i>
                                     <span>Settings</span>
                                 </a>

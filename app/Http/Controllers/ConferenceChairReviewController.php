@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ReviewController extends Controller
+class ConferenceChairReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,29 +17,10 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $user_id = $user->id;
-        $user_limit = $user->max_review_no;
-        $uname = $user->name;
+        $paper_reviewed = DB::table('papers as p')
+                            ->get();
 
-        //Find papers that have been reviewed
-        $reviewed_papers = DB::table('reviews')->get();
-        $reviewed_paper_ID = array();
-        foreach($reviewed_papers as $rp)
-        {
-          $reviewed_paper_ID[]=$rp->paper_id;
-        }
-
-        //get papers that have not been reviewed yet to be displayed to user
-        $userJoin = DB::table('papers')
-        ->join('bids','bids.paper_id','=','papers.pid')
-        ->where(['bids.isAwarded'=>TRUE, 'bids.user_id' => $user_id])
-        ->whereNotIn('bids.paper_id', $reviewed_paper_ID)
-        ->get();
-
-
-        return view('review.index', compact('userJoin'), ['user_id'=>$user_id, 'user_limit_no'=>$user_limit])
-            ->with('i', (request()->input('page',1) - 1) * 5);
+        return view('cc_review.index', compact('paper_reviewed'));
     }
 
     /**
@@ -47,11 +28,10 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
       $user = auth()->user();
-      $pid = $request->input('paper_id');
-      return view('review.create', compact('user'), ['pid'=>$pid]);
+      return view('cc_review.create', compact('user'));
     }
 
     /**
@@ -69,7 +49,7 @@ class ReviewController extends Controller
 
         Review::create($request->all());
 
-        return redirect()->route('review.index')
+        return redirect()->route('cc_review.index')
             ->with('success','Review completed successfully.');
     }
 
@@ -81,7 +61,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        return view('review.show',compact('review'));
+        return view('cc_review.show',compact('review'));
     }
 
     /**
@@ -98,7 +78,8 @@ class ReviewController extends Controller
 
         $review = $review[0];
 
-        return view('review.edit',compact('review'));
+        print_r($review);
+        return view('cc_review.edit',compact('review'));
     }
 
     /**
@@ -112,11 +93,13 @@ class ReviewController extends Controller
     {
       $review = Review::find($request->get('rid'));
 
+      //$review = $review[0];
       $review->paper_rating = $request->input('paper_rating');
       $review->review_status = $request->input('review_status');
+      $review->review_rating = $request->input('review_rating');
       $review->save();
 
-        return redirect()->route('review.index')
+        return redirect()->route('cc_review.index')
             ->with('success','Review updated successfully');
     }
 
@@ -131,27 +114,27 @@ class ReviewController extends Controller
       $r = Review::where('rid','=',$review);
       $r->delete();
 
-      $user = auth()->user();
-      $reviews = Review::where('user_id','=',$user->id)->get();
+      //$review->delete();
 
-
-      return view('review.view', compact('reviews'))
+        return redirect()->route('cc_review.index')
             ->with('success','Review deleted successfully');
     }
 
-    /**
-     * Show table of reviews for user to edit or delete
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function viewReviews()
-    {
-      $user = auth()->user();
-      $reviews = Review::where('user_id','=',$user->id)->get();
+    public function accept($id) {
+        DB::table('papers')
+            ->where('pid', '=', $id)
+            ->update(['paper_status'=>"Accepted"]);
 
-        return view('review.view', compact('reviews'))
-            ->with('success','List successful');
+        return redirect()->route('cc_review.index')
+            ->with('success','Paper status update to accepted successfully');
     }
 
+    public function decline($id) {
+        DB::table('papers')
+            ->where('pid', '=', $id)
+            ->update(['paper_status'=>"Rejected"]);
+
+        return redirect()->route('cc_review.index')
+            ->with('success','Paper status update to rejected successfully');
+    }
 }

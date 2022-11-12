@@ -35,7 +35,11 @@ Route::resource('admin', AdminController::class);
 Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
 Route::get('/viewReviews', [ReviewController::class, 'viewReviews'])->name('viewReviews');
 Route::get('/addComment', [CommentController::class, 'addComment'])->name('addComment');
+Route::put('/accept/{id}', [\App\Http\Controllers\ConferenceChairReviewController::class, 'accept'])->name('accept');
+Route::put('/decline/{id}', [\App\Http\Controllers\ConferenceChairReviewController::class, 'decline'])->name('decline');
 
+Route::resource('cc_review', \App\Http\Controllers\ConferenceChairReviewController::class);
+Route::resource('cc_bid', \App\Http\Controllers\ConferenceChairBidController::class);
 Route::resource('review', \App\Http\Controllers\ReviewController::class);
 Route::resource('paper', \App\Http\Controllers\PaperController::class);
 Route::resource('bid', \App\Http\Controllers\BidController::class);
