@@ -23,7 +23,7 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('viewReviews') }}">
-                    View Reviews
+                    Create Review
                 </a>
             </div>
         </div>

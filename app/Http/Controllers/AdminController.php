@@ -16,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-      $users = User::latest()->paginate(10);
+      $users = User::all();
 
       foreach($users as $user){
         if ($user->type === NULL)

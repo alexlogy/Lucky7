@@ -16,7 +16,7 @@ class PaperController extends Controller
      */
     public function index()
     {
-        $paper = Paper::latest()->paginate(5);
+        $paper = Paper::all();
         return view('paper.index', compact('paper'))
             ->with('i', (request()->input('page',1) - 1) * 5);
     }
