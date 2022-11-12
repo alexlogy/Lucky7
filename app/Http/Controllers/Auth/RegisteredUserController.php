@@ -51,6 +51,13 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        // Set user details in session
+        $user_details = array();
+        $user_details['id'] = Auth::id();
+        $user_details['user'] = Auth::user()->fresh();
+
+        $request->session()->put('user_details', $user_details);
+
         return redirect(RouteServiceProvider::HOME);
     }
 }
