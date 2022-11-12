@@ -78,8 +78,8 @@
                                     <optgroup label="User Roles">
                                         <option value="Author" {{ ($user->type == 'Author') ? 'selected' : '' }}>Author</option>
                                         <option value="Reviewer" {{ ($user->type == 'Reviewer') ? 'selected' : '' }}>Reviewer</option>
-                                        <option value="Both" {{ ($user->type == 'Both') ? 'selected' : '' }}>Author and Reviewer</option>
                                         <option value="Conference Chair" {{ ($user->type == 'Conference Chair') ? 'selected' : '' }}>Conference Chair</option>
+                                        <option value="Admin" {{ ($user->type == 'Admin') ? 'selected' : '' }}>Admin</option>
                                     </optgroup>
                                 </select>
                             </div>

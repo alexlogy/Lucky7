@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user_types = array("Author", "Reviewer", "Both", "Conference Chair");   // initialize array
+        $user_types = array("Author", "Reviewer", "Admin", "Conference Chair");   // initialize array
 
         // seed 100 times
         for ($i = 0; $i <= 100; $i++) {
