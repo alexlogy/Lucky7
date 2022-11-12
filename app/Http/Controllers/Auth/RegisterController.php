@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'type' => 'Author', // default author
             'password' => Hash::make($data['password']),
+            'max_review_no' => 3,
         ]);
     }
 }

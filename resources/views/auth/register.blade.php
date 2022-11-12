@@ -5,6 +5,11 @@
 @section('content')
     <!-- start: page -->
     <section class="body-sign">
+        @if($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
         <div class="center-sign">
             <a href="/" class="logo float-left">
                 <img src="img/logo.png" height="70" alt="Porto Admin" />

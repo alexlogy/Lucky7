@@ -1,18 +1,13 @@
-@extends('paper.layout')
+@extends('../app')
+@extends('../breadcrumbs')
+@extends('../header')
+@extends('../sidebar')
+@extends('../footer')
+
+@section('title', 'Edit Paper')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> Edit Paper </h2>
-            </div>
-
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('paper.index') }}"> Back </a>
-            </div>
-        </div>
-    </div>
-
+    <!-- start: page -->
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input. <br><br>
@@ -25,34 +20,45 @@
             </ul>
         </div>
     @endif
+    <div class="row">
+        <div class="col">
+            <section class="card">
+                <header class="card-header">
+                    <div class="card-actions">
+                        <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                    </div>
 
-    <form action="{{ route('paper.update', $paper->pid) }}" method="POST">
-        @csrf
-        @method('PUT')
+                    <h2 class="card-title">@yield('title')</h2>
+                </header>
+                <div class="card-body">
+                    <form action="{{ route('paper.update', $paper->pid) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group row pb-4">
+                            <label class="col-lg-3 control-label text-lg-end pt-2" for="inputDisabled">Title</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" id="title" type="text" name="title" value="{{ $paper->title }}">
+                            </div>
+                        </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong> Title: </strong>
-                    <input type="text" name="title" value="{{ $paper->title }}" class="form-control" placeholder="Title">
+                        <div class="form-group row pb-4">
+                            <label class="col-lg-3 control-label text-lg-end pt-2" for="inputDefault">Content</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="content" name="content" value="{{ $paper->content }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row pb-3">
+                            <div class="col-lg-3">
+
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="submit" class="mb-1 mt-1 me-1 btn btn-primary"><i class="fas fa-pen-nib"></i> Edit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
+            </section>
         </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong> Content: </strong>
-                    <input type="text" name="content" value="{{ $paper->content }}" class="form-control" placeholder="Content">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary"> Submit </button>
-            </div>
-        </div>
-    </form>
-
+    </div>
 @endsection
