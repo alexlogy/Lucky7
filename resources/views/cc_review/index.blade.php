@@ -41,11 +41,11 @@
             <?php
 
                 $count = DB::table('reviews')
-                    ->where('paper_id', '=', $review->pid)
+                    ->where('paper_pid', '=', $review->pid)
                     ->count();
 
                 $reviewForPaper = DB::table('reviews as r')
-                    ->where('paper_id', '=', $review->pid)
+                    ->where('paper_pid', '=', $review->pid)
                     ->get();
                 $x = 1;
             ?>
@@ -75,9 +75,9 @@
                     <button type="submit" class="btn btn-danger">Reject</button>
                 </form>
             </td>
-        </tr> 
+        </tr>
 
-        
+
 
 
         @endforeach
