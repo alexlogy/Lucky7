@@ -17,7 +17,7 @@ class ConferenceChairBidController extends Controller
 
       // get bid id, paper title, paper content, reviewer's name and email
       $cc_bid = DB::table('bids as b')
-                ->join('papers as p', 'b.paper_id', '=', 'p.pid')
+                ->join('papers as p', 'b.paper_pid', '=', 'p.pid')
                 ->join('users as u', 'u.id', '=', 'b.user_id')
                 ->select('b.bid as bid','p.title as title', 'p.content as content', 'u.name as name', 'u.email as email')
                 ->where('b.isAwarded', '=', false)
