@@ -36,7 +36,7 @@ class BidController extends Controller
         ->leftJoin('reviews','reviews.paper_pid','=','papers.pid')
         ->get();
 
-      return view('bid.index', compact('paper'), ['user_id'=>$user->id]);
+      return view('bid.index', compact('paper'), ['user_id'=>$user->id, 'user_limit_no'=>$user->max_review_no]);
     }
 
     public function create()
@@ -49,10 +49,8 @@ class BidController extends Controller
         $user = auth()->user();
         $rid = $user->id;
         $paper_id = $request->input('paper_id');
-        if($request->input('bid_status')!==NULL)
-        {
-          Bid::create(['paper_pid'=>$paper_id, 'user_id'=>$rid, 'isAwarded'=>FALSE]);
-        }
+
+        Bid::create(['paper_pid'=>$paper_id, 'user_id'=>$rid, 'isAwarded'=>FALSE]);
 
         return redirect()->route('bid.index')
             ->with('success','Bid submitted successfully.');

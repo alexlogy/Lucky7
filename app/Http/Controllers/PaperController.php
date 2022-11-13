@@ -16,7 +16,19 @@ class PaperController extends Controller
      */
     public function index()
     {
-        $paper = Paper::all();
+        $user=auth()->user();
+        if($user->type === "Author")
+        {
+          $paper = DB::table('papers as p')
+                        ->join('submissions as s', 'p.pid', '=', 's.paper_pid')
+                        ->where('s.user_id', '=', $user->id)
+                        ->get();
+        }
+        else
+        {
+          $paper = Paper::all();
+        }
+        
         return view('paper.index', compact('paper'))
             ->with('i', (request()->input('page',1) - 1) * 5);
     }

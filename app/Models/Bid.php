@@ -12,7 +12,7 @@ class Bid extends Model
     protected $primaryKey = 'bid';
 
     protected $fillable = [
-        'paper_id',
+        'paper_pid',
         'user_id',
         'isAwarded',
     ];
