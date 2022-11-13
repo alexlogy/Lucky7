@@ -15,7 +15,6 @@
             <div class="nano">
                 <div class="nano-content">
                     <nav id="menu" class="nav-main" role="navigation">
-
                         <ul class="nav nav-main">
                             <li>
                                 <a class="nav-link" href="{{ URL::to('/dashboard') }}">
@@ -23,20 +22,21 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            @if(session('user_details')['user']['type'] != 'Admin' and session('user_details')['user']['type'] != 'Conference Chair')
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
                                     <i class="bx bx-file" aria-hidden="true"></i>
                                     <span>Papers</span>
                                 </a>
                                 <ul class="nav nav-children">
-                                    @if(session('user_details')['user']['type'] == "Author" or session('user_details')['user']['type'] == "Admin")
+                                    @if(session('user_details')['user']['type'] == "Author")
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('paper') }}">
                                             Submit Papers
                                         </a>
                                     </li>
                                     @endif
-                                    @if(session('user_details')['user']['type'] == "Reviewer" or session('user_details')['user']['type'] == "Admin")
+                                    @if(session('user_details')['user']['type'] == "Reviewer")
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('bid') }}">
                                             Bid Papers
@@ -47,15 +47,16 @@
                                             Review Papers
                                         </a>
                                     </li>
-                                    @endif
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('viewReviews') }}">
                                             View Reviews and Comment
                                         </a>
                                     </li>
+                                    @endif
                                 </ul>
                             </li>
-                            @if(session('user_details')['user']['type'] == "Conference Chair" or session('user_details')['user']['type'] == "Admin")
+                            @endif
+                            @if(session('user_details')['user']['type'] == "Conference Chair")
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
                                     <i class="bx bx-user" aria-hidden="true"></i>
