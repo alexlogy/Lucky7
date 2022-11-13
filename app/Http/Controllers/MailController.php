@@ -29,8 +29,8 @@ class MailController extends Controller
 
             $a = Mail::send('mail', $data, function($message) use ($author){
                 $message->to($author->email, $author->name)
-                        ->subject('Your paper has been evaluated')
-                        ->from('CSIT314_Laravel@hotmail.com','Conference Chair');
+                        ->subject('Your paper has been evaluated');
+                        $message->from('CSIT314_Laravel@hotmail.com','Conference Chair');
             });
         }
         return redirect()->route('cc_review.index')

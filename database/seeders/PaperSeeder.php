@@ -22,7 +22,7 @@ class PaperSeeder extends Seeder
         for ($i = 0; $i <= 100; $i++) {
             DB::table('papers')->insert([
                 'title' => Str::random(20),
-                'content' => Str::random(200),
+                'content' => Str::random(50),
                 'paper_status' => "Pending",
             ]);
 
