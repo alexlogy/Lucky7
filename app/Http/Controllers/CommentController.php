@@ -28,7 +28,7 @@ class CommentController extends Controller
         $paper_id = $request->input('paper_id');
         $comment = $request->input('new_comment');
 
-        Comment::create(['paper_id'=>$paper_id, 'user_id'=>$user->id, 'comment'=>$comment]);
+        Comment::create(['paper_pid'=>$paper_id, 'user_id'=>$user->id, 'comment'=>$comment]);
 
         return redirect()->route('addComment', ['paper_id'=>$paper_id]);
     }

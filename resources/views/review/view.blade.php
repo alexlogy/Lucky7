@@ -30,20 +30,22 @@
     @foreach ($reviews as $review)
         <tr>
            <td> {{ $review->rid }} </td>
-            <td> {{ $review->paper_id }} </td>
+            <td> {{ $review->paper_pid }} </td>
             <td> {{ $review->user_id }} </td>
             <td> {{ $review->review_status }} </td>
             <td>
                 <form action="{{ route('review.destroy', $review->rid) }}" method="POST">
-                    <input type="hidden" name="paper_id" value="{{ $review->paper_id }}">
+                @csrf
+                @method('DELETE')
+                    <input type="hidden" name="paper_id" value="{{ $review->paper_pid }}">
                     <a class="btn btn-primary" href="{{ route('review.edit', $review->rid) }}">
                         Edit
                     </a>
-                    @csrf
+
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 <form action="{{ route('addComment') }}" method="GET">
-                    <input type="hidden" name="paper_id" value="{{ $review->paper_id }}">
+                    <input type="hidden" name="paper_id" value="{{ $review->paper_pid }}">
                     <button type="submit" class="btn btn-primary">Comment</button>
                 </form>
 
