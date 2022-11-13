@@ -34,6 +34,7 @@ require __DIR__.'/auth.php';
 Route::resource('admin', AdminController::class);
 Route::post('/changeLimit/{id}', reviewLimitController::class)->name('change');
 Route::get('/viewReviews', [ReviewController::class, 'viewReviews'])->name('viewReviews');
+Route::post('/rateReview/{id}', [ReviewController::class, 'rateReview'])->name('rateReview');
 Route::get('/addComment', [CommentController::class, 'addComment'])->name('addComment');
 Route::put('/accept/{id}', [\App\Http\Controllers\ConferenceChairReviewController::class, 'accept'])->name('accept');
 Route::put('/decline/{id}', [\App\Http\Controllers\ConferenceChairReviewController::class, 'decline'])->name('decline');

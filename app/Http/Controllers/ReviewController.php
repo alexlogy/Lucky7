@@ -22,8 +22,10 @@ class ReviewController extends Controller
         $user_limit = $user->max_review_no;
         $uname = $user->name;
 
-        //Find papers that have been reviewed
-        $reviewed_papers = DB::table('reviews')->get();
+        //Find papers that have been reviewed by this->user
+        $reviewed_papers = DB::table('reviews')
+                            ->where('user_id','=',$user_id)
+                            ->get();
         $reviewed_paper_ID = array();
         foreach($reviewed_papers as $rp)
         {
@@ -111,7 +113,7 @@ class ReviewController extends Controller
       $review->review_status = $request->input('review_status');
       $review->save();
 
-        return redirect()->route('review.index')
+        return redirect()->route('viewReviews')
             ->with('success','Review updated successfully');
     }
 
@@ -147,6 +149,18 @@ class ReviewController extends Controller
 
         return view('review.view', compact('reviews'))
             ->with('success','List successful');
+    }
+
+    public function rateReview(Request $request, $id)
+    {
+      $rid = $request->input('rid');
+
+      $review = Review::find($id);
+      $review->review_rating = $request->input('review_rating');
+      $review->save();
+
+      $URL = '/addComment?' . 'paper_id=' . $review->paper_pid;
+      return redirect($URL);
     }
 
 }

@@ -37,12 +37,27 @@
     <table class="table table-bordered">
       <tr>
           <th> Reviewer ID </th>
+          <th> Paper rating </th>
           <th> Review </th>
+          <th> Current Review Rating</th>
+          <th> Rate review (1-5) </th>
       </tr>
     @foreach ($reviews as $review)
         <tr>
             <td> {{ $review->rid }} </td>
+            <td> {{ $review->paper_rating}} </td>
             <td> {{ $review->review_status }} </td>
+            <td> {{ $review->review_rating }} </td>
+            <td>
+              <form action="{{ route('rateReview', $review->rid) }}" method="POST">
+                @csrf
+                @method('POST')
+                <input style="width:200px" type="text" name="review_rating" placeholder="1 for worst and 5 for best">
+                <input type="submit" value="rate">
+              </form>
+            </td>
+
+            
         </tr>
     @endforeach
     </table>

@@ -48,15 +48,27 @@
 
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
-                    <strong> Paper Rating </strong>
-                    <input type="text" name="paper_rating" class="form-control" placeholder="Paper Rating">
+                    <input type="radio" id="three" name="paper_rating" value="3">
+                    <label for="three">3 (strong accept)</label>
+                    <input type="radio" id="two" name="paper_rating" value="2">
+                    <label for="two">2 (accept)</label>
+                    <input type="radio" id="one" name="paper_rating" value="1">
+                    <label for="one">1 (weak accept)</label>
+                    <input type="radio" id="zero" name="paper_rating" value="0">
+                    <label for="zero">0 (borderline paper)</label>
+                    <input type="radio" id="neg1" name="paper_rating" value="-1">
+                    <label for="neg1">-1 (weak reject)</label>
+                    <input type="radio" id="neg2" name="paper_rating" value="-2">
+                    <label for="neg2">-2 (reject)</label>
+                    <input type="radio" id="neg3" name="paper_rating" value="-3">
+                    <label for="neg3">-3 (strong reject)</label>
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
-                    <strong> Review Status </strong>
-                    <input type="text" name="review_status" class="form-control" placeholder="Review Status">
+                    <strong> Review </strong>
+                    <input type="text" name="review_status" class="form-control" placeholder="Write your review here...">
                 </div>
             </div>
 
