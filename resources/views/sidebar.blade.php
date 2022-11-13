@@ -47,12 +47,14 @@
                                             Review Papers
                                         </a>
                                     </li>
+                                    @endif
+                                      @if(session('user_details')['user']['type'] == "Author" or session('user_details')['user']['type'] == "Reviewer")
                                     <li>
                                         <a class="nav-link" href="{{ URL::to('viewReviews') }}">
                                             View Reviews and Comment
                                         </a>
                                     </li>
-                                    @endif
+                                      @endif
                                 </ul>
                             </li>
                             @endif

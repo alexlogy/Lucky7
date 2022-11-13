@@ -23,6 +23,7 @@
             <th> Review ID </th>
             <th> Paper ID </th>
             <th> Reviewer </th>
+            <th> Paper Rating </th>
             <th> Review </th>
             <th width="280px"> Action </th>
         </tr>
@@ -32,6 +33,7 @@
            <td> {{ $review->rid }} </td>
             <td> {{ $review->paper_pid }} </td>
             <td> {{ $review->user_id }} </td>
+            <td> {{ $review->paper_rating}} </td>
             <td> {{ $review->review_status }} </td>
             <td>
                 <form action="{{ route('review.destroy', $review->rid) }}" method="POST">

@@ -98,6 +98,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Content</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -107,6 +108,7 @@
                                 <td>{{ $paper->pid }}</td>
                                 <td>{{ $paper->title }}</td>
                                 <td>{{ $paper->content }}</td>
+                                <td>{{ $paper->paper_status}}</td>
                                 <!-- Actions -->
                                 <td>
                                     <form action="{{ route('paper.destroy', $paper->pid) }}" method="POST">
