@@ -43,7 +43,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($paper as $papers)
+                        @foreach ($paper as $paper)
                             <tr>
                                 <td>{{ $paper->pid }}</td>
                                 <td>{{ $paper->title }}</td>
