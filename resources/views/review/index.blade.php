@@ -19,15 +19,6 @@
             <th> Paper Content </th>
             <th width="280px"> Action </th>
         </tr>
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('viewReviews') }}">
-                    Create Review
-                </a>
-            </div>
-        </div>
-    </div>
 
     @if($message = Session::get('success'))
         <div class="alert alert-success">
@@ -51,16 +42,5 @@
         @endforeach
     </table>
 
-    <form action="{{ route('change', $user_id) }}" method="POST">
-      <input type="hidden" name="id" value="{{ $user_id }}">
-      <label>Current review limit: {{ $user_limit_no }}</label><br>
-      <label for="limit">Set new limit:</label><br>
-      <input type="text" id="limit" name="max_review_no">
-      @csrf
-      @method('POST')
-
-      <input type="submit" value="set">
-
-    </form>
 
     @endsection

@@ -63,7 +63,6 @@
                 <form action="{{ route('accept', $review->pid) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <!--<input hidden type="text" name="paper_id" value="{{ $review->pid }}">-->
                     <button type="submit" class="btn btn-success">Accept</button>
                 </form>
             </td>
@@ -71,8 +70,14 @@
                 <form action="{{ route('decline', $review->pid) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <!--<input hidden type="text" name="paper_id" value="{{ $review->pid }}">-->
                     <button type="submit" class="btn btn-danger">Reject</button>
+                </form>
+            </td>
+            <td>
+                <form action="{{ route('email', $review->pid) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn btn-primary">Email Authors</button>
                 </form>
             </td>
         </tr>

@@ -27,7 +27,7 @@ class ReviewController extends Controller
         $reviewed_paper_ID = array();
         foreach($reviewed_papers as $rp)
         {
-          $reviewed_paper_ID[]=$rp->paper_id;
+          $reviewed_paper_ID[]=$rp->paper_pid;
         }
 
         //get papers that have not been reviewed yet to be displayed to user
@@ -61,10 +61,6 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'paper_id' => 'required',
-            'user_id' =>'required',
-        ]);
 
         Review::create($request->all());
 

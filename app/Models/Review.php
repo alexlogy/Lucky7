@@ -12,7 +12,7 @@ class Review extends Model
     protected $primaryKey = 'rid';
 
     protected $fillable = [
-        'paper_id',
+        'paper_pid',
         'user_id',
         'paper_rating',
         'review_status',

@@ -15,7 +15,7 @@ class reviewLimitController extends Controller
       $user->max_review_no = $request->input('max_review_no');
       $user->save();
 
-        return redirect()->route('review.index')
+        return redirect()->route('bid.index')
             ->with('success','Limit updated successfully');
   }
 }

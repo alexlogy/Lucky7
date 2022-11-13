@@ -35,14 +35,14 @@
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
                    <strong> Paper Id </strong>
-                    <input type="text" read-only name="paper_id" class="form-control" placeholder="Paper Id" value="{{ $pid }}">
+                    <input type="text" readonly name="paper_pid" class="form-control" placeholder="Paper Id" value="{{ $pid }}">
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-sm-12">
                 <div class="form-group">
                     <strong> Reviewer Id </strong>
-                    <input type="text" read-only name="user_id" class="form-control" value="{{ $user->id }}">
+                    <input type="text" readonly name="user_id" class="form-control" value="{{ $user->id }}">
                 </div>
             </div>
 
