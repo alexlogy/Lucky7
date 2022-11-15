@@ -145,7 +145,18 @@ class ReviewController extends Controller
     public function viewReviews()
     {
       $user = auth()->user();
-      $reviews = Review::where('user_id','=',$user->id)->get();
+      if($user->type == "Reviewer")
+      {
+        $reviews = Review::where('user_id','=',$user->id)->get();
+      }
+      else
+      {
+        $reviews = DB::table('reviews as r')
+                  ->join('submissions as s', 'r.paper_pid', '=', 's.paper_pid')
+                  ->where('s.user_id','=',$user->id)
+                  ->get();
+      }
+      
 
         return view('review.view', compact('reviews'))
             ->with('success','List successful');
